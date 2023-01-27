@@ -1,5 +1,6 @@
 import * as AWS from 'aws-sdk'
-import * as AWSXRay from 'aws-xray-sdk'
+//import * as AWSXRay from 'aws-xray-sdk'
+const AWSXRay = require('aws-xray-sdk')
 import { DocumentClient } from 'aws-sdk/clients/dynamodb'
 import { createLogger } from '../utils/logger'
 import { TodoItem } from '../models/TodoItem'
@@ -17,7 +18,6 @@ export class TodoAccess {
   ) {}
 
   async getTodosForUser(userId: string): Promise<TodoItem[]> {
-    console.log('Getting all todoItems')
     logger.info('Getting all todoItems', {'userId': userId })
 
     const result = await this.docClient
