@@ -18,7 +18,7 @@ export class TodoAccess {
   ) {}
 
   async getTodosForUser(userId: string): Promise<TodoItem[]> {
-    logger.info('Getting all todoItems', {'userId': userId })
+    logger.info('Getting all todoItems1', {'userId': userId })
 
     const result = await this.docClient
       .query({
@@ -32,6 +32,7 @@ export class TodoAccess {
       .promise()
 
     const items = result.Items
+    logger.info('Getting all todoItems2', {'items': items })
     return items as TodoItem[]
   }
 
