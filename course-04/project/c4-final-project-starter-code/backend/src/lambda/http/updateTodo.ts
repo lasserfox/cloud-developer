@@ -14,6 +14,19 @@ export const handler = middy(
     const todoId = event.pathParameters.todoId
     const updatedTodo: UpdateTodoRequest = JSON.parse(event.body)
     logger.info('update1', {'todoId': todoId,'updatedTodo': updatedTodo })
+    if (!updatedTodo.name){
+    return {
+      statusCode: 404,
+      headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*' // replace with hostname of frontend (CloudFront)
+    },
+      body: JSON.stringify({
+        'msg': 'item empty'
+      })
+    }
+    }
+
     // TODO: Update a TODO item with the provided id using values in the "updatedTodo" object
     const validTodoId = await todoItemExists(event, todoId)
    logger.info('update2', {'isvalid': validTodoId })

@@ -2,7 +2,8 @@
 org: lasserfox
 app: serverless-todo-app
 service: serverless-todo-app
-#variablesResolutionMode: 20210326
+variablesResolutionMode: 20210326
+configValidationMode: warn
 
 plugins:
   - serverless-webpack
@@ -97,7 +98,7 @@ functions:
           path: todos
           cors: true
           authorizer: Auth
-          reqValidatorName: RequestBodyValidator
+          reqValidatorName: 'RequestBodyValidator'
           documentation:
             summary: Create a new todo item
             description: Create a new todo item
@@ -128,7 +129,7 @@ functions:
   # Provide property for setting up CORS, Authorizer, iamRoleStatements
           cors: true
           authorizer: Auth
-          reqValidatorName: RequestBodyValidator
+          reqValidatorName: 'RequestBodyValidator'
           documentation:
             summary: Update a todo item
             description: Update a todo item
@@ -228,7 +229,7 @@ resources:
         RestApiId:
           Ref: ApiGatewayRestApi
         ValidateRequestBody: true
-        ValidateRequestParameters: true
+        ValidateRequestParameters: false
 
     # TODO: Complete the bucket properties below. 
     # Do not forget to add the CorsConfiguration propoerty
@@ -262,6 +263,6 @@ resources:
             - Sid: PublicReadForGetBucketObjects
               Effect: Allow
               Principal: '*'
-              Action: 's3:GetObject'
+              Action: '*'
               Resource: 'arn:aws:s3:::${self:provider.environment.ATTACHMENT_S3_BUCKET}/*'
         Bucket: !Ref AttachmentsBucket
