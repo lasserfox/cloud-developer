@@ -2,7 +2,7 @@
 org: lasserfox
 app: serverless-todo-app
 service: serverless-todo-app
-variablesResolutionMode: 20210326
+#variablesResolutionMode: 20210326
 configValidationMode: warn
 
 plugins:
