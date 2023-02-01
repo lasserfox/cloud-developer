@@ -14,18 +14,6 @@ export const handler = middy(
     // TODO: Implement creating a new TODO item
     logger.info('create1', {'event.body': event.body })
     const newItem = await createTodo(newTodo, event)
-    if (!newTodo.name){
-    return {
-      statusCode: 404,
-      headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*' // replace with hostname of frontend (CloudFront)
-    },
-      body: JSON.stringify({
-        'msg': 'item empty'
-      })
-    }
-    }
     logger.info('create2', {'newItem': newItem })
     return {
       statusCode: 201,
